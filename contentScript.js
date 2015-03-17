@@ -1,6 +1,9 @@
 window.onload = function(event) {
-  sendMessage("opening", document.visibilityState, event.timeStamp)
+  sendMessage("opening", document.visibilityState, event.timeStamp);
 
+  document.addEventListener("visibilitychange", function(event) {
+    sendMessage("running", document.visibilityState, event.timeStamp);
+  });
 };
 
 function sendMessage(tabState, tabVisibility, time) {
