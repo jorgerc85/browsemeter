@@ -1,6 +1,9 @@
 window.onload = function(event) {
-  var tabVisibility = document.visibilityState;
-  var message = { 'tabState': tabState, 'tabVisibility': tabVisibility, 'time': event.timeStamp };
-  chrome.runtime.sendMessage(message);
+  sendMessage("opening", document.visibilityState, event.timeStamp)
 
+};
+
+function sendMessage(tabState, tabVisibility, time) {
+  var message = { 'tabState': tabState, 'tabVisibility': tabVisibility, 'time': time };
+  chrome.runtime.sendMessage(message);
 };
