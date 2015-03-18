@@ -31,8 +31,12 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
       }
       break;
     case "closing":
-      chrome.storage.local.get(function(info) {
-        console.log(info)
+      chrome.storage.local.get(website, function(response) {
+        totalTime = (message.time - response[website]['openTime']) / 1000
+        response[website]['totalTime'] += totalTime
+        chrome.storage.local.set(response, function(response) {
+          console.log("saved")
+        });
       });
       break;
   }
