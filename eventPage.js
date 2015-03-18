@@ -15,7 +15,9 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
       }
       break;
     case "closing":
-      updateTotalTime(website, message)
+      if (message.tabVisibility == "visible") {
+        updateTotalTime(website, message)
+      }
       break;
   }
 });
