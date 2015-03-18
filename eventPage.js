@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(function(message, sender) {
-  website = sender.url.match(/\/{2}\w+.(\w+.{1}\w+)\//)[1]
+  website = sender.url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1]
   switch (message.tabState) {
     case "opening":
       saveOpeningTime(website, message)
