@@ -12,6 +12,12 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
     case "running":
       switch (message.tabVisibility) {
         case "visible":
+          chrome.storage.local.get(function(info) {
+            info[website]['openTime'] = message.time
+            chrome.storage.local.set(info, function(info) {
+              console.log("saved")
+            });
+          });
           break;
         case "hidden":
           break;
