@@ -21,9 +21,9 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
 });
 
 function saveOpeningTime(website, message) {
-  chrome.storage.local.get(function(info) {
-    info[website]['openTime'] = message.time
-    chrome.storage.local.set(info, function(info) {
+  chrome.storage.local.get(website, function(response) {
+    response[website]['openTime'] = message.time
+    chrome.storage.local.set(response, function(response) {
       console.log("saved")
     });
   });
