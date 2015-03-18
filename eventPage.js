@@ -1,4 +1,3 @@
 chrome.runtime.onMessage.addListener(function(message, sender) {
-  console.log(message)
-  website = sender.url.match(/\/\/(\S+)\//)[1]
+  website = sender.url.match(/\/{2}\w+.(\w+.{1}\w+)\//)[1]
 });
