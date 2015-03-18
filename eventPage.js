@@ -2,22 +2,12 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
   website = sender.url.match(/\/{2}\w+.(\w+.{1}\w+)\//)[1]
   switch (message.tabState) {
     case "opening":
-      chrome.storage.local.get(function(info) {
-        info[website]['openTime'] = message.time
-        chrome.storage.local.set(info, function(info) {
-          console.log("saved")
-        });
-      });
+      saveOpeningTime(website, message)
       break;
     case "running":
       switch (message.tabVisibility) {
         case "visible":
-          chrome.storage.local.get(function(info) {
-            info[website]['openTime'] = message.time
-            chrome.storage.local.set(info, function(info) {
-              console.log("saved")
-            });
-          });
+          saveOpeningTime(website, message)
           break;
         case "hidden":
           chrome.storage.local.get(website, function(response) {
@@ -41,3 +31,12 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
       break;
   }
 });
+
+function saveOpeningTime(website, message) {
+  chrome.storage.local.get(function(info) {
+    info[website]['openTime'] = message.time
+    chrome.storage.local.set(info, function(info) {
+      console.log("saved")
+    });
+  });
+}
