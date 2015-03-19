@@ -6,10 +6,10 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
       break;
     case "running":
       switch (message.tabVisibility) {
-        case "visible":
+        case true:
           saveOpeningTime(website, message)
           break;
-        case "hidden":
+        case false:
           updateTotalTime(website, message)
           break;
       }

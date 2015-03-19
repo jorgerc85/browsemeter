@@ -1,8 +1,12 @@
 window.onload = function(event) {
   sendMessage("opening", document.visibilityState, event.timeStamp);
 
-  document.addEventListener("visibilitychange", function(event) {
-    sendMessage("running", document.visibilityState, event.timeStamp);
+  window.addEventListener("focus", function(event) {
+    sendMessage("running", document.hasFocus(), event.timeStamp);
+  });
+
+  window.addEventListener("blur", function(event) {
+    sendMessage("running", document.hasFocus(), event.timeStamp);
   });
 
   window.addEventListener("beforeunload", function (event) {
