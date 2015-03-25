@@ -24,19 +24,24 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
 
 function saveOpeningTime(website, message) {
   chrome.storage.local.get(website, function(response) {
-    response[website]['openTime'] = message.time
-    chrome.storage.local.set(response, function(response) {
-      console.log("saved")
-    });
+    if (response[website]['tracking'] == true) {
+      response[website]['openTime'] = message.time
+      chrome.storage.local.set(response, function(response) {
+        console.log("saved")
+      });
+    };
   });
 };
 
 function updateTotalTime(website, message) {
   chrome.storage.local.get(website, function(response) {
-    totalTime = (message.time - response[website]['openTime']) / 1000
-    response[website]['totalTime'] += totalTime
-    chrome.storage.local.set(response, function(response) {
-      console.log("saved")
-    });
+    var openTime = response[website]['openTime']
+    if (response[website]['tracking'] == true && openTime != 0) {
+      var totalTime = (message.time - openTime) / 1000
+      response[website]['totalTime'] += totalTime
+      chrome.storage.local.set(response, function(response) {
+        console.log("saved")
+      });
+    };
   });
 };
