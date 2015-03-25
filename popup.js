@@ -11,10 +11,12 @@ function retrieveFromStorage() {
 };
 
 function counterDisplay(response) {
+  var date = new Date();
   var websiteCounters = document.getElementsByClassName('websiteCounters');
+  var dateHeader = document.getElementById('date');
   for (var i = 0; i < websiteCounters.length; i++) {
-    var date = new Date();
     var counter = websiteCounters[i].getAttribute('name');
+    dateHeader.innerText = (date.getMonth() + 1) + "/" + date.getDate()
     if (response[counter]['trackDate'] == date.getDate()) {
       var totalTime = response[counter]['totalTime'];
       websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
