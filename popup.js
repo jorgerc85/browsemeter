@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  counterDisplay();
+  retrieveFromStorage();
   var websiteOptions = document.getElementsByClassName('websiteOptions');
   for (var i = 0; i < websiteOptions.length; i++) {
     websiteOptions[i].addEventListener('change', function(event) {
@@ -16,13 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 });
 
-function counterDisplay() {
+function retrieveFromStorage() {
   chrome.storage.local.get(function(response) {
-    var websiteCounters = document.getElementsByClassName('websiteCounters');
-    for (var i = 0; i < websiteCounters.length; i++) {
-      var counter = websiteCounters[i].getAttribute('name');
-      var totalTime = response[counter]['totalTime'];
-      websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
-    };
+    counterDisplay(response)
   });
+};
+
+function counterDisplay(response) {
+  var websiteCounters = document.getElementsByClassName('websiteCounters');
+  for (var i = 0; i < websiteCounters.length; i++) {
+    var counter = websiteCounters[i].getAttribute('name');
+    var totalTime = response[counter]['totalTime'];
+    websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
+  };
 };
