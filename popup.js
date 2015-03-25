@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function retrieveFromStorage() {
   chrome.storage.local.get(function(response) {
-    counterDisplay(response)
+    counterDisplay(response);
+    settingsDisplay(response);
   });
 };
 
@@ -28,5 +29,15 @@ function counterDisplay(response) {
     var counter = websiteCounters[i].getAttribute('name');
     var totalTime = response[counter]['totalTime'];
     websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
+  };
+};
+
+function settingsDisplay(response) {
+  var websiteOptions = document.getElementsByClassName('websiteOptions');
+  for (var i = 0; i < websiteOptions.length; i++) {
+    var checkboxName = websiteOptions[i].getAttribute('name');
+    if (response[checkboxName]['tracking'] == true) {
+      websiteOptions[i].setAttribute('checked', '');
+    };
   };
 };
