@@ -22,13 +22,7 @@ function counterDisplay() {
     for (var i = 0; i < websiteCounters.length; i++) {
       var counter = websiteCounters[i].getAttribute('name');
       var totalTime = response[counter]['totalTime'];
-      websiteCounters[i].innerText = timeFormat(totalTime);
+      websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
     };
   });
-};
-
-function timeFormat(totalTime) {
-  minutes = Math.floor(totalTime / 60);
-  seconds = Math.floor(((totalTime / 60) - minutes) * 60);
-  return minutes + ":" + seconds;
 };
