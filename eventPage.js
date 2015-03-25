@@ -35,10 +35,16 @@ function saveOpeningTime(website, message) {
 
 function updateTotalTime(website, message) {
   chrome.storage.local.get(website, function(response) {
-    var openTime = response[website]['openTime']
+    var openTime = response[website]['openTime'];
     if (response[website]['tracking'] == true && openTime != 0) {
-      var totalTime = (message.time - openTime) / 1000
-      response[website]['totalTime'] += totalTime
+      var date = new Date();
+      if (response[website]['trackDate'] == date.getDate()) {
+        var partialTime = (message.time - openTime) / 1000;
+        response[website]['totalTime'] += partialTime;
+      } else {
+        response[website]['totalTime'] = 0;
+      };
+      response[website]['trackDate'] = date.getDate();
       chrome.storage.local.set(response, function(response) {
         console.log("saved")
       });
