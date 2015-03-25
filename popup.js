@@ -35,6 +35,7 @@ function saveOnChange(response) {
     websiteOptions[i].addEventListener('change', function(event) {
       response[event.target.name] = {
         'tracking': event.target.checked,
+        'openTime': 0,
         'totalTime': 0
       };
       chrome.storage.local.set(response, function(response) {
