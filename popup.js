@@ -11,12 +11,17 @@ function retrieveFromStorage() {
 };
 
 function counterDisplay(response) {
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
   var date = new Date();
   var websiteCounters = document.getElementsByClassName('websiteCounters');
-  var dateHeader = document.getElementById('date');
+  var dayHeader = document.getElementById('day');
+  var dateHeader = document.getElementById('month-name');
   for (var i = 0; i < websiteCounters.length; i++) {
     var counter = websiteCounters[i].getAttribute('name');
-    dateHeader.innerText = (date.getMonth() + 1) + "/" + date.getDate()
+    dateHeader.innerText = monthNames[date.getMonth()];
+    dayHeader.innerText = date.getDate();
     if (response[counter]['trackDate'] == date.getDate()) {
       var totalTime = response[counter]['totalTime'];
       websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
