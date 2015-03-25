@@ -1,25 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
-  var websiteOptions = document.getElementsByClassName('websiteOptions');
-  for (var i = 0; i < websiteOptions.length; i++) {
-    websiteOptions[i].addEventListener('change', function(event) {
-      chrome.storage.local.get(function(response) {
-        response[event.target.name] = {
-          'tracking': event.target.checked,
-          'totalTime': 0
-        };
-        chrome.storage.local.set(response, function(response) {
-          console.log("saved");
-        });
-      });
-    });
-  };
 });
 
 function retrieveFromStorage() {
   chrome.storage.local.get(function(response) {
     counterDisplay(response);
     settingsDisplay(response);
+    saveOnChange(response)
   });
 };
 
@@ -41,3 +28,18 @@ function settingsDisplay(response) {
     };
   };
 };
+
+function saveOnChange(response) {
+  var websiteOptions = document.getElementsByClassName('websiteOptions');
+  for (var i = 0; i < websiteOptions.length; i++) {
+    websiteOptions[i].addEventListener('change', function(event) {
+      response[event.target.name] = {
+        'tracking': event.target.checked,
+        'totalTime': 0
+      };
+      chrome.storage.local.set(response, function(response) {
+        console.log("saved");
+      });
+    });
+  };
+}
