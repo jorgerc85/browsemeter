@@ -2,4 +2,56 @@ body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
   width: 120px;
+  background-color: #DEDEDE;
+}
+
+#options {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 10px 4px 10px 4px;
+  height: 60px;
+}
+
+#calendar {
+  background-color: red;
+  border: 1px solid gray;
+  text-align: center;
+  max-width: 50%;
+  display: block;
+  left: 50%;
+  margin-left: 25%;
+  margin-bottom: 9px;
+}
+
+#month-contanier {
+  background-color: #D20505;
+}
+
+#month-name {
+  margin-bottom: 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+}
+
+#day-container {
+  background-color: white
+}
+
+#day {
+  margin-top: 0px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+  font-size: x-large;
+}
+
+#counter-header {
+  margin: 10px 0px 12px 0px;
+}
+
+#counter {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 0px 4px 0px 4px;
 }
