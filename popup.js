@@ -11,8 +11,8 @@ function retrieveFromStorage() {
 };
 
 function counterDisplay(response) {
-  var monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+  var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
   var date = new Date();
   var websiteCounters = document.getElementsByClassName('websiteCounters');
