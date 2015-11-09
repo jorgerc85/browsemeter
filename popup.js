@@ -6,7 +6,7 @@ function retrieveFromStorage() {
   chrome.storage.local.get(function(response) {
     counterDisplay(response);
     settingsDisplay(response);
-    saveOnChange(response)
+    saveOnChange(response);
   });
 };
 
@@ -37,14 +37,19 @@ function settingsDisplay(response) {
   var websiteOptions = document.getElementsByClassName('websiteOptions');
   for (var i = 0; i < websiteOptions.length; i++) {
     var checkboxName = websiteOptions[i].getAttribute('name');
-    if (response[checkboxName]['tracking'] == true) {
-      websiteOptions[i].setAttribute('checked', '');
+    if (Object.keys(response).length > 0) {
+      if (response[checkboxName]['tracking'] == true) {
+        websiteOptions[i].setAttribute('checked', '');
+      };
     };
   };
 };
 
 function saveOnChange(response) {
   var websiteOptions = document.getElementsByClassName('websiteOptions');
+  if (Object.keys(response).length == 0) {
+    saveDefault(websiteOptions, response);
+  };
   for (var i = 0; i < websiteOptions.length; i++) {
     websiteOptions[i].addEventListener('change', function(event) {
       var date = new Date();
@@ -59,4 +64,19 @@ function saveOnChange(response) {
       });
     });
   };
-}
+};
+
+function saveDefault(websiteOptions, response) {
+  for (var i = 0; i < websiteOptions.length; i++) {
+    var date = new Date();
+    response[websiteOptions[i].name] = {
+      'tracking': false,
+      'openTime': 0,
+      'totalTime': 0,
+      'trackDate': date.getDate()
+    };
+    chrome.storage.local.set(response, function(response) {
+      console.log("dafault saved");
+    });
+  };
+};
