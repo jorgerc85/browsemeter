@@ -22,11 +22,13 @@ function counterDisplay(response) {
     var counter = websiteCounters[i].getAttribute('name');
     dateHeader.innerText = monthNames[date.getMonth()];
     dayHeader.innerText = date.getDate();
-    if (response[counter]['trackDate'] == date.getDate()) {
-      var totalTime = response[counter]['totalTime'];
-      websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
-    } else {
-      websiteCounters[i].innerText = "0 min.";
+    if (Object.keys(response).length > 0) {
+      if (response[counter]['trackDate'] == date.getDate()) {
+        var totalTime = response[counter]['totalTime'];
+        websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
+      } else {
+        websiteCounters[i].innerText = "0 min.";
+      };
     };
   };
 };
