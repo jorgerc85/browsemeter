@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function retrieveFromStorage() {
+  var websiteOptions = document.getElementsByClassName('websiteOptions');
   chrome.storage.local.get(function(response) {
     counterDisplay(response);
-    settingsDisplay(response);
-    saveOnChange(response);
+    settingsDisplay(websiteOptions, response);
+    saveOnChange(websiteOptions, response);
   });
 };
 
@@ -33,8 +34,7 @@ function counterDisplay(response) {
   };
 };
 
-function settingsDisplay(response) {
-  var websiteOptions = document.getElementsByClassName('websiteOptions');
+function settingsDisplay(websiteOptions, response) {
   for (var i = 0; i < websiteOptions.length; i++) {
     var checkboxName = websiteOptions[i].getAttribute('name');
     if (Object.keys(response).length > 0) {
@@ -45,8 +45,7 @@ function settingsDisplay(response) {
   };
 };
 
-function saveOnChange(response) {
-  var websiteOptions = document.getElementsByClassName('websiteOptions');
+function saveOnChange(websiteOptions, response) {
   if (Object.keys(response).length == 0) {
     saveDefault(websiteOptions, response);
   };
