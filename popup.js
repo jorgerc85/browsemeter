@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
 });
 
+function getCurrentTabURL() {
+  chrome.tabs.query({active: true, currentWindow: true}, function(response) {
+    var currentTabURL = response[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
+  });
+};
+
 function retrieveFromStorage() {
   var websiteOptions = document.getElementsByClassName('websiteOptions');
   chrome.storage.local.get(function(response) {
