@@ -5,6 +5,10 @@ body {
   background-color: #DEDEDE;
 }
 
+h4, h5 {
+  text-align: center;
+}
+
 #options {
   background-color: white;
   border: 1px solid gray;
