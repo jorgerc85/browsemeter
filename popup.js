@@ -32,6 +32,36 @@ function trackCurrentWebsite(response) {
   });
 };
 
+function saveOnChange(websiteOptions, response) {
+  if (Object.keys(response).length == 0) {
+    saveDefault(websiteOptions, response);
+  };
+  for (var i = 0; i < websiteOptions.length; i++) {
+    websiteOptions[i].addEventListener('change', function(event) {
+      saveToStorage(response, event.target.name, event.target.checked);
+    });
+  };
+};
+
+function saveDefault(websiteOptions, response) {
+  for (var i = 0; i < websiteOptions.length; i++) {
+    saveToStorage(response, websiteOptions[i].name, false);
+  };
+};
+
+function saveToStorage(response, websiteURL, activeTracking) {
+  var date = new Date();
+  response[websiteURL] = {
+    'tracking': activeTracking,
+    'openTime': 0,
+    'totalTime': 0,
+    'trackDate': date.getDate()
+  };
+  chrome.storage.local.set(response, function(response) {
+    displayFeedback('Saved!');
+  });
+};
+
 function displayCounters(response) {
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
@@ -64,36 +94,6 @@ function displaySettings(websiteOptions, response) {
       };
     };
   };
-};
-
-function saveOnChange(websiteOptions, response) {
-  if (Object.keys(response).length == 0) {
-    saveDefault(websiteOptions, response);
-  };
-  for (var i = 0; i < websiteOptions.length; i++) {
-    websiteOptions[i].addEventListener('change', function(event) {
-      saveToStorage(response, event.target.name, event.target.checked);
-    });
-  };
-};
-
-function saveDefault(websiteOptions, response) {
-  for (var i = 0; i < websiteOptions.length; i++) {
-    saveToStorage(response, websiteOptions[i].name, false);
-  };
-};
-
-function saveToStorage(response, websiteURL, activeTracking) {
-  var date = new Date();
-  response[websiteURL] = {
-    'tracking': activeTracking,
-    'openTime': 0,
-    'totalTime': 0,
-    'trackDate': date.getDate()
-  };
-  chrome.storage.local.set(response, function(response) {
-    displayFeedback('Saved!');
-  });
 };
 
 function displayFeedback(feedback) {
