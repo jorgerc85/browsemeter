@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
 });
 
+function functionLoader(websiteOptions, response) {
+  trackCurrentWebsite(response);
+  counterDisplay(response);
+  settingsDisplay(websiteOptions, response);
+  saveOnChange(websiteOptions, response);
+};
+
 function trackCurrentWebsite(response) {
   document.getElementById('track-website').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
@@ -14,10 +21,7 @@ function trackCurrentWebsite(response) {
 function retrieveFromStorage() {
   var websiteOptions = document.getElementsByClassName('websiteOptions');
   chrome.storage.local.get(function(response) {
-    trackCurrentWebsite(response);
-    counterDisplay(response);
-    settingsDisplay(websiteOptions, response);
-    saveOnChange(websiteOptions, response);
+    functionLoader(websiteOptions, response);
   });
 };
 
