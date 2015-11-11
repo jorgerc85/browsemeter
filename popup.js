@@ -11,8 +11,8 @@ function retrieveFromStorage() {
 
 function functionLoader(websiteOptions, response) {
   trackCurrentWebsite(response);
-  counterDisplay(response);
-  settingsDisplay(websiteOptions, response);
+  displayCounters(response);
+  displaySettings(websiteOptions, response);
   saveOnChange(websiteOptions, response);
 };
 
@@ -32,7 +32,7 @@ function trackCurrentWebsite(response) {
   });
 };
 
-function counterDisplay(response) {
+function displayCounters(response) {
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
@@ -55,7 +55,7 @@ function counterDisplay(response) {
   };
 };
 
-function settingsDisplay(websiteOptions, response) {
+function displaySettings(websiteOptions, response) {
   for (var i = 0; i < websiteOptions.length; i++) {
     var checkboxName = websiteOptions[i].getAttribute('name');
     if (Object.keys(response).length > 0) {
