@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
-  trackCurrentWebsite();
 });
 
-function trackCurrentWebsite() {
+function trackCurrentWebsite(response) {
   document.getElementById('track-website').addEventListener('click', function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(response) {
-      var currentTabURL = response[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
+    chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
+      var currentTabURL = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
+      saveToStorage(response, currentTabURL, true);
     });
   });
 };
@@ -14,6 +14,7 @@ function trackCurrentWebsite() {
 function retrieveFromStorage() {
   var websiteOptions = document.getElementsByClassName('websiteOptions');
   chrome.storage.local.get(function(response) {
+    trackCurrentWebsite(response);
     counterDisplay(response);
     settingsDisplay(websiteOptions, response);
     saveOnChange(websiteOptions, response);
