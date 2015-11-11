@@ -24,30 +24,34 @@ chrome.runtime.onMessage.addListener(function(message, sender) {
 
 function saveOpeningTime(website, message) {
   chrome.storage.local.get(website, function(response) {
-    if (response[website]['tracking'] == true) {
-      response[website]['openTime'] = message.time
-      chrome.storage.local.set(response, function(response) {
-        console.log("saved")
-      });
+    if (response[website] !== undefined) {
+      if (response[website]['tracking'] == true) {
+        response[website]['openTime'] = message.time
+        chrome.storage.local.set(response, function(response) {
+          console.log("saved")
+        });
+      };
     };
   });
 };
 
 function updateTotalTime(website, message) {
   chrome.storage.local.get(website, function(response) {
-    var openTime = response[website]['openTime'];
-    if (response[website]['tracking'] == true && openTime != 0) {
-      var date = new Date();
-      if (response[website]['trackDate'] == date.getDate()) {
-        var partialTime = (message.time - openTime) / 1000;
-        response[website]['totalTime'] += partialTime;
-      } else {
-        response[website]['totalTime'] = 0;
+    if (response[website] !== undefined) {
+      var openTime = response[website]['openTime'];
+      if (response[website]['tracking'] == true && openTime != 0) {
+        var date = new Date();
+        if (response[website]['trackDate'] == date.getDate()) {
+          var partialTime = (message.time - openTime) / 1000;
+          response[website]['totalTime'] += partialTime;
+        } else {
+          response[website]['totalTime'] = 0;
+        };
+        response[website]['trackDate'] = date.getDate();
+        chrome.storage.local.set(response, function(response) {
+          console.log("saved")
+        });
       };
-      response[website]['trackDate'] = date.getDate();
-      chrome.storage.local.set(response, function(response) {
-        console.log("saved")
-      });
     };
   });
 };
