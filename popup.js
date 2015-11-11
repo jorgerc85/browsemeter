@@ -60,31 +60,26 @@ function saveOnChange(websiteOptions, response) {
   };
   for (var i = 0; i < websiteOptions.length; i++) {
     websiteOptions[i].addEventListener('change', function(event) {
-      var date = new Date();
-      response[event.target.name] = {
-        'tracking': event.target.checked,
-        'openTime': 0,
-        'totalTime': 0,
-        'trackDate': date.getDate()
-      };
-      chrome.storage.local.set(response, function(response) {
-        console.log("saved");
-      });
+      saveToStorage(response, event.target.name, event.target.checked);
     });
   };
 };
 
 function saveDefault(websiteOptions, response) {
   for (var i = 0; i < websiteOptions.length; i++) {
-    var date = new Date();
-    response[websiteOptions[i].name] = {
-      'tracking': false,
-      'openTime': 0,
-      'totalTime': 0,
-      'trackDate': date.getDate()
-    };
-    chrome.storage.local.set(response, function(response) {
-      console.log("dafault saved");
-    });
+    saveToStorage(response, websiteOptions[i].name, false);
   };
+};
+
+function saveToStorage(response, websiteURL, activeTracking) {
+  var date = new Date();
+  response[websiteURL] = {
+    'tracking': activeTracking,
+    'openTime': 0,
+    'totalTime': 0,
+    'trackDate': date.getDate()
+  };
+  chrome.storage.local.set(response, function(response) {
+    console.log("saved");
+  });
 };
