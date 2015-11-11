@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
 });
 
+function retrieveFromStorage() {
+  var websiteOptions = document.getElementsByClassName('websiteOptions');
+  chrome.storage.local.get(function(response) {
+    functionLoader(websiteOptions, response);
+  });
+};
+
 function functionLoader(websiteOptions, response) {
   trackCurrentWebsite(response);
   counterDisplay(response);
@@ -15,13 +22,6 @@ function trackCurrentWebsite(response) {
       var currentTabURL = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
       saveToStorage(response, currentTabURL, true);
     });
-  });
-};
-
-function retrieveFromStorage() {
-  var websiteOptions = document.getElementsByClassName('websiteOptions');
-  chrome.storage.local.get(function(response) {
-    functionLoader(websiteOptions, response);
   });
 };
 
