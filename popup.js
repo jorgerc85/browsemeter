@@ -20,7 +20,14 @@ function trackCurrentWebsite(response) {
   document.getElementById('track-website').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
       var currentTabURL = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
-      saveToStorage(response, currentTabURL, true);
+      var alreadyTracking = Object.keys(response).some(function(websiteURL) {
+        return websiteURL == currentTabURL;
+      });
+      if (!alreadyTracking) {
+        saveToStorage(response, currentTabURL, true);
+      } else {
+        console.log('Already tracking this website!');
+      };
     });
   });
 };
