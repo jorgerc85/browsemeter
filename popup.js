@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
   retrieveFromStorage();
-  getCurrentTabURL();
+  trackCurrentWebsite();
 });
 
-function getCurrentTabURL() {
+function trackCurrentWebsite() {
   document.getElementById('track-website').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(response) {
       var currentTabURL = response[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
