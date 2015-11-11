@@ -26,7 +26,7 @@ function trackCurrentWebsite(response) {
       if (!alreadyTracking) {
         saveToStorage(response, currentTabURL, true);
       } else {
-        console.log('Already tracking this website!');
+        displayFeedback('Already tracking');
       };
     });
   });
@@ -92,6 +92,15 @@ function saveToStorage(response, websiteURL, activeTracking) {
     'trackDate': date.getDate()
   };
   chrome.storage.local.set(response, function(response) {
-    console.log("saved");
+    displayFeedback('Saved!');
   });
+};
+
+function displayFeedback(feedback) {
+  var feedbackField = document.getElementById('feedback');
+  feedbackField.className = 'show';
+  feedbackField.innerText = feedback;
+  setTimeout(function() {
+    feedbackField.className = 'hide';
+  }, 2000);
 };

@@ -9,6 +9,14 @@ h4, h5 {
   text-align: center;
 }
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 #options {
   background-color: white;
   border: 1px solid gray;
