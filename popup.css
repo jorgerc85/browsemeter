@@ -24,6 +24,11 @@ h5, h6 {
   height: 60px;
 }
 
+#track-website {
+  width: 80%;
+  margin-left: 10%;
+}
+
 #calendar {
   background-color: red;
   border: 1px solid gray;
