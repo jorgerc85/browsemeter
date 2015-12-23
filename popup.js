@@ -10,8 +10,10 @@ function retrieveFromStorage() {
 };
 
 function functionLoader(websiteOptions, response) {
+  var date = new Date();
   trackCurrentWebsite(response);
-  displayCounters(response);
+  displayCalendar(date);
+  displayCounters(response, date);
   displaySettings(websiteOptions, response);
   saveOnChange(websiteOptions, response);
 };
@@ -62,18 +64,20 @@ function saveToStorage(response, websiteURL, activeTracking) {
   });
 };
 
-function displayCounters(response) {
+function displayCalendar(date) {
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
-  var date = new Date();
-  var websiteCounters = document.getElementsByClassName('websiteCounters');
   var dayHeader = document.getElementById('day');
   var dateHeader = document.getElementById('month-name');
+  dateHeader.innerText = monthNames[date.getMonth()];
+  dayHeader.innerText = date.getDate();
+};
+
+function displayCounters(response, date) {
+  var websiteCounters = document.getElementsByClassName('websiteCounters');
   for (var i = 0; i < websiteCounters.length; i++) {
     var counter = websiteCounters[i].getAttribute('name');
-    dateHeader.innerText = monthNames[date.getMonth()];
-    dayHeader.innerText = date.getDate();
     if (Object.keys(response).length > 0) {
       if (response[counter]['trackDate'] == date.getDate()) {
         var totalTime = response[counter]['totalTime'];
