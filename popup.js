@@ -86,13 +86,21 @@ function displayCounters(response) {
 };
 
 function displaySettings(websiteOptions, response) {
-  for (var i = 0; i < websiteOptions.length; i++) {
-    var checkboxName = websiteOptions[i].getAttribute('name');
-    if (Object.keys(response).length > 0) {
-      if (response[checkboxName]['tracking'] == true) {
-        websiteOptions[i].setAttribute('checked', '');
-      };
-    };
+  var registeredWebsites = Object.keys(response);
+  var optionsDiv = document.getElementById('options');
+  for (var web in registeredWebsites) {
+    var newDiv = document.createElement('div');
+    newDiv.setAttribute('id', registeredWebsites[web]);
+    var newLabel = document.createElement('label');
+    var newInput = document.createElement('input');
+    newInput.setAttribute('type', 'checkbox');
+    newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
+    newInput.setAttribute('name', registeredWebsites[web]);
+    newInput.setAttribute('class', 'websiteOptions');
+    newLabel.innerText = registeredWebsites[web];
+    optionsDiv.appendChild(newDiv);
+    newDiv.appendChild(newInput);
+    newDiv.appendChild(newLabel);
   };
 };
 
