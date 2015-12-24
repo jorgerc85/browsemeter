@@ -26,6 +26,15 @@ h5, h6 {
   height: auto;
 }
 
+#options label {
+  font-size: small;
+  vertical-align: text-top;
+}
+
+.counterSpan {
+  float: right;
+}
+
 #track-website {
   width: 80%;
   margin-left: 10%;
