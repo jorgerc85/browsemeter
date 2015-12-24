@@ -95,16 +95,20 @@ function displaySettings(websiteOptions, response) {
   for (var web in registeredWebsites) {
     var newDiv = document.createElement('div');
     newDiv.setAttribute('id', registeredWebsites[web]);
-    var newLabel = document.createElement('label');
+    optionsDiv.appendChild(newDiv);
     var newInput = document.createElement('input');
     newInput.setAttribute('type', 'checkbox');
     newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
     newInput.setAttribute('name', registeredWebsites[web]);
     newInput.setAttribute('class', 'websiteOptions');
-    newLabel.innerText = registeredWebsites[web];
-    optionsDiv.appendChild(newDiv);
     newDiv.appendChild(newInput);
+    var newLabel = document.createElement('label');
+    newLabel.innerText = registeredWebsites[web];
     newDiv.appendChild(newLabel);
+    var counterSpan = document.createElement('span');
+    counterSpan.setAttribute('name', registeredWebsites[web]);
+    counterSpan.setAttribute('class', 'counterSpan');
+    newLabel.appendChild(counterSpan);
   };
 };
 
