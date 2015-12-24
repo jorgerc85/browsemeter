@@ -13,8 +13,8 @@ function functionLoader(websiteOptions, response) {
   var date = new Date();
   trackCurrentWebsite(response);
   displayCalendar(date);
-  displayCounters(response, date);
   displaySettings(websiteOptions, response);
+  displayCounters(response, date);
   saveOnChange(websiteOptions, response);
 };
 
