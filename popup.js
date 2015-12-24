@@ -75,7 +75,7 @@ function displayCalendar(date) {
 };
 
 function displayCounters(response, date) {
-  var websiteCounters = document.getElementsByClassName('websiteCounters');
+  var websiteCounters = document.getElementsByClassName('counterSpan');
   for (var i = 0; i < websiteCounters.length; i++) {
     var counter = websiteCounters[i].getAttribute('name');
     if (Object.keys(response).length > 0) {
