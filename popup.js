@@ -81,24 +81,30 @@ function displayCalendar(date) {
 
 function displayTrackedWebsites(trackedWebsites, response) {
   var registeredWebsites = Object.keys(response);
-  var optionsDiv = document.getElementById('options');
-  for (var web in registeredWebsites) {
-    var newDiv = document.createElement('div');
-    newDiv.setAttribute('id', registeredWebsites[web]);
-    optionsDiv.appendChild(newDiv);
-    var newInput = document.createElement('input');
-    newInput.setAttribute('type', 'checkbox');
-    newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
-    newInput.setAttribute('name', registeredWebsites[web]);
-    newInput.setAttribute('class', 'trackedWebsites');
-    newDiv.appendChild(newInput);
-    var newLabel = document.createElement('label');
-    newLabel.innerText = registeredWebsites[web];
-    newDiv.appendChild(newLabel);
-    var counterSpan = document.createElement('span');
-    counterSpan.setAttribute('name', registeredWebsites[web]);
-    counterSpan.setAttribute('class', 'counterSpan');
-    newLabel.appendChild(counterSpan);
+  var trackedWebsitesDiv = document.getElementById('trackedWebsites');
+  if (registeredWebsites.length > 0) {
+    trackedWebsitesDiv.className = 'show';
+    var optionsDiv = document.getElementById('options');
+    for (var web in registeredWebsites) {
+      var newDiv = document.createElement('div');
+      newDiv.setAttribute('id', registeredWebsites[web]);
+      optionsDiv.appendChild(newDiv);
+      var newInput = document.createElement('input');
+      newInput.setAttribute('type', 'checkbox');
+      newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
+      newInput.setAttribute('name', registeredWebsites[web]);
+      newInput.setAttribute('class', 'trackedWebsites');
+      newDiv.appendChild(newInput);
+      var newLabel = document.createElement('label');
+      newLabel.innerText = registeredWebsites[web];
+      newDiv.appendChild(newLabel);
+      var counterSpan = document.createElement('span');
+      counterSpan.setAttribute('name', registeredWebsites[web]);
+      counterSpan.setAttribute('class', 'counterSpan');
+      newLabel.appendChild(counterSpan);
+    };
+  } else {
+    trackedWebsitesDiv.className = 'hide';
   };
 };
 
