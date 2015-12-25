@@ -20,7 +20,7 @@ function functionLoader(trackedWebsites, response) {
 };
 
 function trackCurrentWebsite(response) {
-  document.getElementById('track-website').addEventListener('click', function() {
+  document.getElementById('trackWebsiteButton').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
       var regexpURLMatch = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//);
       if (regexpURLMatch === null) {
@@ -74,7 +74,7 @@ function displayCalendar(date) {
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
   var dayHeader = document.getElementById('day');
-  var dateHeader = document.getElementById('month-name');
+  var dateHeader = document.getElementById('monthName');
   dateHeader.innerText = monthNames[date.getMonth()];
   dayHeader.innerText = date.getDate();
 };

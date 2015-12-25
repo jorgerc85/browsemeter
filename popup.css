@@ -19,14 +19,14 @@ h4, h6 {
   display: none;
 }
 
-#tracked-websites {
+#trackedWebsites {
   background-color: white;
   border: 1px solid gray;
   padding: 10px 4px 10px 4px;
   height: auto;
 }
 
-#tracked-websites label {
+#trackedWebsites label {
   font-size: small;
   vertical-align: text-top;
 }
@@ -35,7 +35,7 @@ h4, h6 {
   float: right;
 }
 
-#track-website {
+#trackWebsiteButton {
   margin-top: 10px;
   margin-bottom: 5px;
   width: 70%;
@@ -55,13 +55,13 @@ h4, h6 {
   margin-bottom: 9px;
 }
 
-#month-contanier {
+#monthContanier {
   background-color: #D20505;
   height: 20px;
   border-bottom: 1px solid gray;
 }
 
-#month-name {
+#monthName {
   margin-bottom: 0px;
   padding-top: 4px;
   padding-bottom: 2px;
@@ -69,7 +69,7 @@ h4, h6 {
   font-size: 10px;
 }
 
-#day-container {
+#dayContainer {
   background-color: white;
   height: 48px;
 }
