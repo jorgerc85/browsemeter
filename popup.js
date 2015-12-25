@@ -85,26 +85,30 @@ function displayTrackedWebsites(trackedWebsites, response) {
   if (registeredWebsites.length > 0) {
     trackedWebsitesDiv.className = 'show';
     for (var web in registeredWebsites) {
-      var newDiv = document.createElement('div');
-      newDiv.setAttribute('id', registeredWebsites[web]);
-      trackedWebsitesDiv.appendChild(newDiv);
-      var newInput = document.createElement('input');
-      newInput.setAttribute('type', 'checkbox');
-      newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
-      newInput.setAttribute('name', registeredWebsites[web]);
-      newInput.setAttribute('class', 'trackedWebsites');
-      newDiv.appendChild(newInput);
-      var newLabel = document.createElement('label');
-      newLabel.innerText = registeredWebsites[web];
-      newDiv.appendChild(newLabel);
-      var counterSpan = document.createElement('span');
-      counterSpan.setAttribute('name', registeredWebsites[web]);
-      counterSpan.setAttribute('class', 'counterSpan');
-      newLabel.appendChild(counterSpan);
+      constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv);
     };
   } else {
     trackedWebsitesDiv.className = 'hide';
   };
+};
+
+function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
+  var newDiv = document.createElement('div');
+  newDiv.setAttribute('id', registeredWebsites[web]);
+  trackedWebsitesDiv.appendChild(newDiv);
+  var newInput = document.createElement('input');
+  newInput.setAttribute('type', 'checkbox');
+  newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
+  newInput.setAttribute('name', registeredWebsites[web]);
+  newInput.setAttribute('class', 'trackedWebsites');
+  newDiv.appendChild(newInput);
+  var newLabel = document.createElement('label');
+  newLabel.innerText = registeredWebsites[web];
+  newDiv.appendChild(newLabel);
+  var counterSpan = document.createElement('span');
+  counterSpan.setAttribute('name', registeredWebsites[web]);
+  counterSpan.setAttribute('class', 'counterSpan');
+  newLabel.appendChild(counterSpan);
 };
 
 function displayCounters(response, date) {
