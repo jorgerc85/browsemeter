@@ -12,8 +12,8 @@ function functionLoader(response) {
   var trackedWebsites = document.getElementsByClassName('trackedWebsites');
   var date = new Date();
   trackCurrentWebsite(response);
-  saveDefaultValues(trackedWebsites, response);
-  saveOnChange(trackedWebsites, response);
+  saveDefaultValues(response, trackedWebsites);
+  saveOnChange(response, trackedWebsites);
   displayCalendar(date);
   displayTrackedWebsites(response, date);
 };
@@ -39,7 +39,7 @@ function trackCurrentWebsite(response) {
   });
 };
 
-function saveOnChange(trackedWebsites, response) {
+function saveOnChange(response, trackedWebsites) {
   for (var i = 0; i < trackedWebsites.length; i++) {
     trackedWebsites[i].addEventListener('change', function(event) {
       saveToStorage(response, event.target.name, event.target.checked);
@@ -47,7 +47,7 @@ function saveOnChange(trackedWebsites, response) {
   };
 };
 
-function saveDefaultValues(trackedWebsites, response) {
+function saveDefaultValues(response, trackedWebsites) {
   if (Object.keys(response).length == 0) {
     for (var i = 0; i < trackedWebsites.length; i++) {
       saveToStorage(response, trackedWebsites[i].name, false);
