@@ -84,11 +84,10 @@ function displayTrackedWebsites(trackedWebsites, response) {
   var trackedWebsitesDiv = document.getElementById('trackedWebsites');
   if (registeredWebsites.length > 0) {
     trackedWebsitesDiv.className = 'show';
-    var optionsDiv = document.getElementById('options');
     for (var web in registeredWebsites) {
       var newDiv = document.createElement('div');
       newDiv.setAttribute('id', registeredWebsites[web]);
-      optionsDiv.appendChild(newDiv);
+      trackedWebsitesDiv.appendChild(newDiv);
       var newInput = document.createElement('input');
       newInput.setAttribute('type', 'checkbox');
       newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
