@@ -22,14 +22,19 @@ function functionLoader(trackedWebsites, response) {
 function trackCurrentWebsite(response) {
   document.getElementById('track-website').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
-      var currentTabURL = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//)[1];
-      var alreadyTracking = Object.keys(response).some(function(websiteURL) {
-        return websiteURL == currentTabURL;
-      });
-      if (!alreadyTracking) {
-        saveToStorage(response, currentTabURL, true);
+      var regexpURLMatch = tab[0].url.match(/\/{2}(.*\.*\w+\.{1}\w+)\//);
+      if (regexpURLMatch === null) {
+        displayFeedback('Invalid URL');
       } else {
-        displayFeedback('Already tracking');
+        var currentTabURL = regexpURLMatch[1];
+        var alreadyTracking = Object.keys(response).some(function(websiteURL) {
+          return websiteURL == currentTabURL;
+        });
+        if (!alreadyTracking) {
+          saveToStorage(response, currentTabURL, true);
+        } else {
+          displayFeedback('Already tracking');
+        };
       };
     });
   });
