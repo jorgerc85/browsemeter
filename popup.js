@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function retrieveFromStorage() {
-  var trackedWebsites = document.getElementsByClassName('trackedWebsites');
   chrome.storage.local.get(function(response) {
-    functionLoader(trackedWebsites, response);
+    functionLoader(response);
   });
 };
 
-function functionLoader(trackedWebsites, response) {
+function functionLoader(response) {
+  var trackedWebsites = document.getElementsByClassName('trackedWebsites');
   var date = new Date();
   trackCurrentWebsite(response);
   saveDefaultValues(trackedWebsites, response);
