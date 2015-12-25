@@ -3,20 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function retrieveFromStorage() {
-  var websiteOptions = document.getElementsByClassName('websiteOptions');
+  var trackedWebsites = document.getElementsByClassName('trackedWebsites');
   chrome.storage.local.get(function(response) {
-    functionLoader(websiteOptions, response);
+    functionLoader(trackedWebsites, response);
   });
 };
 
-function functionLoader(websiteOptions, response) {
+function functionLoader(trackedWebsites, response) {
   var date = new Date();
   trackCurrentWebsite(response);
   displayCalendar(date);
-  displaySettings(websiteOptions, response);
+  displaySettings(trackedWebsites, response);
   displayCounters(response, date);
-  saveDefaultValues(websiteOptions, response);
-  saveOnChange(websiteOptions, response);
+  saveDefaultValues(trackedWebsites, response);
+  saveOnChange(trackedWebsites, response);
 };
 
 function trackCurrentWebsite(response) {
@@ -35,18 +35,18 @@ function trackCurrentWebsite(response) {
   });
 };
 
-function saveOnChange(websiteOptions, response) {
-  for (var i = 0; i < websiteOptions.length; i++) {
-    websiteOptions[i].addEventListener('change', function(event) {
+function saveOnChange(trackedWebsites, response) {
+  for (var i = 0; i < trackedWebsites.length; i++) {
+    trackedWebsites[i].addEventListener('change', function(event) {
       saveToStorage(response, event.target.name, event.target.checked);
     });
   };
 };
 
-function saveDefaultValues(websiteOptions, response) {
+function saveDefaultValues(trackedWebsites, response) {
   if (Object.keys(response).length == 0) {
-    for (var i = 0; i < websiteOptions.length; i++) {
-      saveToStorage(response, websiteOptions[i].name, false);
+    for (var i = 0; i < trackedWebsites.length; i++) {
+      saveToStorage(response, trackedWebsites[i].name, false);
     };
   };
 };
@@ -89,7 +89,7 @@ function displayCounters(response, date) {
   };
 };
 
-function displaySettings(websiteOptions, response) {
+function displaySettings(trackedWebsites, response) {
   var registeredWebsites = Object.keys(response);
   var optionsDiv = document.getElementById('options');
   for (var web in registeredWebsites) {
@@ -100,7 +100,7 @@ function displaySettings(websiteOptions, response) {
     newInput.setAttribute('type', 'checkbox');
     newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
     newInput.setAttribute('name', registeredWebsites[web]);
-    newInput.setAttribute('class', 'websiteOptions');
+    newInput.setAttribute('class', 'trackedWebsites');
     newDiv.appendChild(newInput);
     var newLabel = document.createElement('label');
     newLabel.innerText = registeredWebsites[web];
