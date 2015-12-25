@@ -15,6 +15,7 @@ function functionLoader(websiteOptions, response) {
   displayCalendar(date);
   displaySettings(websiteOptions, response);
   displayCounters(response, date);
+  saveDefaultValues(websiteOptions, response);
   saveOnChange(websiteOptions, response);
 };
 
@@ -35,9 +36,6 @@ function trackCurrentWebsite(response) {
 };
 
 function saveOnChange(websiteOptions, response) {
-  if (Object.keys(response).length == 0) {
-    saveDefault(websiteOptions, response);
-  };
   for (var i = 0; i < websiteOptions.length; i++) {
     websiteOptions[i].addEventListener('change', function(event) {
       saveToStorage(response, event.target.name, event.target.checked);
@@ -45,9 +43,11 @@ function saveOnChange(websiteOptions, response) {
   };
 };
 
-function saveDefault(websiteOptions, response) {
-  for (var i = 0; i < websiteOptions.length; i++) {
-    saveToStorage(response, websiteOptions[i].name, false);
+function saveDefaultValues(websiteOptions, response) {
+  if (Object.keys(response).length == 0) {
+    for (var i = 0; i < websiteOptions.length; i++) {
+      saveToStorage(response, websiteOptions[i].name, false);
+    };
   };
 };
 
