@@ -13,7 +13,7 @@ function functionLoader(trackedWebsites, response) {
   var date = new Date();
   trackCurrentWebsite(response);
   displayCalendar(date);
-  displaySettings(trackedWebsites, response);
+  displayTrackedWebsites(trackedWebsites, response);
   displayCounters(response, date);
   saveDefaultValues(trackedWebsites, response);
   saveOnChange(trackedWebsites, response);
@@ -89,7 +89,7 @@ function displayCounters(response, date) {
   };
 };
 
-function displaySettings(trackedWebsites, response) {
+function displayTrackedWebsites(trackedWebsites, response) {
   var registeredWebsites = Object.keys(response);
   var optionsDiv = document.getElementById('options');
   for (var web in registeredWebsites) {
