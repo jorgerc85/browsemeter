@@ -19,14 +19,14 @@ h4, h6 {
   display: none;
 }
 
-#options {
+#tracked-websites {
   background-color: white;
   border: 1px solid gray;
   padding: 10px 4px 10px 4px;
   height: auto;
 }
 
-#options label {
+#tracked-websites label {
   font-size: small;
   vertical-align: text-top;
 }
