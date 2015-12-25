@@ -12,11 +12,11 @@ function retrieveFromStorage() {
 function functionLoader(trackedWebsites, response) {
   var date = new Date();
   trackCurrentWebsite(response);
+  saveDefaultValues(trackedWebsites, response);
+  saveOnChange(trackedWebsites, response);
   displayCalendar(date);
   displayTrackedWebsites(trackedWebsites, response);
   displayCounters(response, date);
-  saveDefaultValues(trackedWebsites, response);
-  saveOnChange(trackedWebsites, response);
 };
 
 function trackCurrentWebsite(response) {
@@ -79,21 +79,6 @@ function displayCalendar(date) {
   dayHeader.innerText = date.getDate();
 };
 
-function displayCounters(response, date) {
-  var websiteCounters = document.getElementsByClassName('counterSpan');
-  for (var i = 0; i < websiteCounters.length; i++) {
-    var counter = websiteCounters[i].getAttribute('name');
-    if (Object.keys(response).length > 0) {
-      if (response[counter]['trackDate'] == date.getDate()) {
-        var totalTime = response[counter]['totalTime'];
-        websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
-      } else {
-        websiteCounters[i].innerText = "0 min.";
-      };
-    };
-  };
-};
-
 function displayTrackedWebsites(trackedWebsites, response) {
   var registeredWebsites = Object.keys(response);
   var optionsDiv = document.getElementById('options');
@@ -114,6 +99,21 @@ function displayTrackedWebsites(trackedWebsites, response) {
     counterSpan.setAttribute('name', registeredWebsites[web]);
     counterSpan.setAttribute('class', 'counterSpan');
     newLabel.appendChild(counterSpan);
+  };
+};
+
+function displayCounters(response, date) {
+  var websiteCounters = document.getElementsByClassName('counterSpan');
+  for (var i = 0; i < websiteCounters.length; i++) {
+    var counter = websiteCounters[i].getAttribute('name');
+    if (Object.keys(response).length > 0) {
+      if (response[counter]['trackDate'] == date.getDate()) {
+        var totalTime = response[counter]['totalTime'];
+        websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
+      } else {
+        websiteCounters[i].innerText = "0 min.";
+      };
+    };
   };
 };
 
