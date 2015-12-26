@@ -48,7 +48,7 @@ function trackCurrentWebsite(response) {
 };
 
 function saveOnChange(response) {
-  var trackedWebsites = document.getElementsByClassName('trackedWebsite');
+  var trackedWebsites = document.getElementsByClassName('websiteCheckbox');
   for (var i = 0; i < trackedWebsites.length; i++) {
     trackedWebsites[i].addEventListener('change', function(event) {
       response = buildTrackingObject(response, event.target.name, event.target.checked);
@@ -106,23 +106,23 @@ function clearTrackedWebsitesDiv() {
 };
 
 function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
-  var newDiv = document.createElement('div');
-  newDiv.setAttribute('class', 'singleWebsite');
-  newDiv.setAttribute('id', registeredWebsites[web]);
-  trackedWebsitesDiv.appendChild(newDiv);
-  var newInput = document.createElement('input');
-  newInput.setAttribute('type', 'checkbox');
-  newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
-  newInput.setAttribute('name', registeredWebsites[web]);
-  newInput.setAttribute('class', 'trackedWebsite');
-  newDiv.appendChild(newInput);
-  var newLabel = document.createElement('label');
-  newLabel.innerText = registeredWebsites[web];
-  newDiv.appendChild(newLabel);
+  var singleWebsiteDiv = document.createElement('div');
+  singleWebsiteDiv.setAttribute('class', 'singleWebsite');
+  singleWebsiteDiv.setAttribute('id', registeredWebsites[web]);
+  trackedWebsitesDiv.appendChild(singleWebsiteDiv);
+  var websiteCheckbox = document.createElement('input');
+  websiteCheckbox.setAttribute('type', 'checkbox');
+  websiteCheckbox.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
+  websiteCheckbox.setAttribute('name', registeredWebsites[web]);
+  websiteCheckbox.setAttribute('class', 'websiteCheckbox');
+  singleWebsiteDiv.appendChild(websiteCheckbox);
+  var websiteLabel = document.createElement('label');
+  websiteLabel.innerText = registeredWebsites[web];
+  singleWebsiteDiv.appendChild(websiteLabel);
   var counterSpan = document.createElement('span');
   counterSpan.setAttribute('name', registeredWebsites[web]);
   counterSpan.setAttribute('class', 'counterSpan');
-  newLabel.appendChild(counterSpan);
+  websiteLabel.appendChild(counterSpan);
 };
 
 function displayCounters(response, date) {
