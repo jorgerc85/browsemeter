@@ -34,16 +34,17 @@ function trackCurrentWebsite(response) {
         displayFeedback('Invalid URL');
       } else {
         var currentTabURL = regexpURLMatch[1];
-        var alreadyTracking = Object.keys(response).some(function(websiteURL) {
+        var registeredWebsites = Object.keys(response);
+        var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
+        var alreadyTracking = registeredWebsites.some(function(websiteURL) {
           return websiteURL == currentTabURL;
         });
         if (!alreadyTracking) {
           response = buildTrackingObject(response, currentTabURL, true);
           saveToStorage(response);
-          retrieveFromStorage().then(function(response) {
-            var date = new Date();
-            displayTrackedWebsites(response, date);
-          });
+          registeredWebsites.push(currentTabURL);
+          var newWebsiteIndex = registeredWebsites.length - 1;
+          constructSingleWebsiteDiv(response, newWebsiteIndex, registeredWebsites, trackedWebsitesDiv);
         } else {
           displayFeedback('Already tracking');
         };
