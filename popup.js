@@ -25,7 +25,6 @@ function loadInterface(response) {
 
 function loadListeners(response) {
   trackCurrentWebsite(response);
-  saveOnChange(response);
 };
 
 function trackCurrentWebsite(response) {
@@ -54,14 +53,11 @@ function trackCurrentWebsite(response) {
   });
 };
 
-function saveOnChange(response) {
-  var trackedWebsites = document.getElementsByClassName('websiteCheckbox');
-  for (var i = 0; i < trackedWebsites.length; i++) {
-    trackedWebsites[i].addEventListener('change', function(event) {
-      response = buildTrackingObject(response, event.target.name, event.target.checked);
-      saveToStorage(response);
-    });
-  };
+function saveOnChange(response, websiteCheckbox) {
+  websiteCheckbox.addEventListener('change', function(event) {
+    response = buildTrackingObject(response, event.target.name, event.target.checked);
+    saveToStorage(response);
+  });
 };
 
 function saveToStorage(response) {
@@ -123,6 +119,7 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   counterSpan.setAttribute('name', registeredWebsites[web]);
   counterSpan.setAttribute('class', 'counterSpan');
   websiteLabel.appendChild(counterSpan);
+  saveOnChange(response, websiteCheckbox);
 };
 
 function displayCounters(response, date) {
