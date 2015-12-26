@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-  retrieveFromStorage();
+  retrieveFromStorage().then(function(response) {
+    functionLoader(response);
+  });
 });
 
 function retrieveFromStorage() {
-  chrome.storage.local.get(function(response) {
-    functionLoader(response);
+  return new Promise(function(resolve) {
+    chrome.storage.local.get(function(response) {
+      resolve(response);
+    });
   });
 };
 
