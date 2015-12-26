@@ -13,7 +13,7 @@ function retrieveFromStorage() {
 };
 
 function functionLoader(response) {
-  var trackedWebsites = document.getElementsByClassName('trackedWebsites');
+  var trackedWebsites = document.getElementsByClassName('trackedWebsite');
   var date = new Date();
   trackCurrentWebsite(response);
   saveDefaultValues(response, trackedWebsites);
@@ -84,7 +84,7 @@ function displayCalendar(date) {
 
 function displayTrackedWebsites(response, date) {
   var registeredWebsites = Object.keys(response);
-  var trackedWebsitesDiv = document.getElementById('trackedWebsites');
+  var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
   if (registeredWebsites.length > 0) {
     trackedWebsitesDiv.className = 'show';
     for (var web in registeredWebsites) {
@@ -104,7 +104,7 @@ function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWe
   newInput.setAttribute('type', 'checkbox');
   newInput.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
   newInput.setAttribute('name', registeredWebsites[web]);
-  newInput.setAttribute('class', 'trackedWebsites');
+  newInput.setAttribute('class', 'trackedWebsite');
   newDiv.appendChild(newInput);
   var newLabel = document.createElement('label');
   newLabel.innerText = registeredWebsites[web];
