@@ -32,7 +32,8 @@ function trackCurrentWebsite(response) {
           return websiteURL == currentTabURL;
         });
         if (!alreadyTracking) {
-          saveToStorage(response, currentTabURL, true);
+          response = buildTrackingObject(response, currentTabURL, true);
+          saveToStorage(response);
           retrieveFromStorage().then(function(response) {
             clearTrackedWebsitesDiv();
             var date = new Date();
@@ -50,7 +51,8 @@ function saveOnChange(response) {
   var trackedWebsites = document.getElementsByClassName('trackedWebsite');
   for (var i = 0; i < trackedWebsites.length; i++) {
     trackedWebsites[i].addEventListener('change', function(event) {
-      saveToStorage(response, event.target.name, event.target.checked);
+      response = buildTrackingObject(response, event.target.name, event.target.checked);
+      saveToStorage(response);
     });
   };
 };
