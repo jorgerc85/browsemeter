@@ -98,6 +98,7 @@ function displayTrackedWebsites(response, date) {
 
 function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
   var newDiv = document.createElement('div');
+  newDiv.setAttribute('class', 'singleWebsite');
   newDiv.setAttribute('id', registeredWebsites[web]);
   trackedWebsitesDiv.appendChild(newDiv);
   var newInput = document.createElement('input');
