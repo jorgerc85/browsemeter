@@ -35,7 +35,6 @@ function trackCurrentWebsite(response) {
       } else {
         var currentTabURL = regexpURLMatch[1];
         var registeredWebsites = Object.keys(response);
-        var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
         var alreadyTracking = registeredWebsites.some(function(websiteURL) {
           return websiteURL == currentTabURL;
         });
@@ -43,14 +42,22 @@ function trackCurrentWebsite(response) {
           response = buildTrackingObject(response, currentTabURL, true);
           saveToStorage(response);
           registeredWebsites.push(currentTabURL);
-          var newWebsiteIndex = registeredWebsites.length - 1;
-          constructSingleWebsiteDiv(response, newWebsiteIndex, registeredWebsites, trackedWebsitesDiv);
+          updateOnNewTrack(response, registeredWebsites);
         } else {
           displayFeedback('Already tracking');
         };
       };
     });
   });
+};
+
+function updateOnNewTrack(response, registeredWebsites) {
+  var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
+  var newWebsiteIndex = registeredWebsites.length - 1;
+  if (trackedWebsitesDiv.className == 'hide') {
+    trackedWebsitesDiv.className = 'show';
+  };
+  constructSingleWebsiteDiv(response, newWebsiteIndex, registeredWebsites, trackedWebsitesDiv);
 };
 
 function saveOnChange(response, websiteCheckbox) {
