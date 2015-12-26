@@ -13,10 +13,9 @@ function retrieveFromStorage() {
 };
 
 function functionLoader(response) {
-  var trackedWebsites = document.getElementsByClassName('trackedWebsite');
   var date = new Date();
   trackCurrentWebsite(response);
-  saveOnChange(response, trackedWebsites);
+  saveOnChange(response);
   displayCalendar(date);
   displayTrackedWebsites(response, date);
 };
@@ -47,7 +46,8 @@ function trackCurrentWebsite(response) {
   });
 };
 
-function saveOnChange(response, trackedWebsites) {
+function saveOnChange(response) {
+  var trackedWebsites = document.getElementsByClassName('trackedWebsite');
   for (var i = 0; i < trackedWebsites.length; i++) {
     trackedWebsites[i].addEventListener('change', function(event) {
       saveToStorage(response, event.target.name, event.target.checked);
