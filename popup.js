@@ -13,10 +13,14 @@ function retrieveFromStorage() {
 };
 
 function functionLoader(response) {
+  loadListeners(response);
   var date = new Date();
-  trackCurrentWebsite(response);
   displayCalendar(date);
   displayTrackedWebsites(response, date);
+};
+
+function loadListeners(response) {
+  trackCurrentWebsite(response);
   saveOnChange(response);
 };
 
