@@ -18,9 +18,8 @@ function functionLoader(response) {
 };
 
 function loadInterface(response) {
-  var date = new Date();
-  displayCalendar(date);
-  displayTrackedWebsites(response, date);
+  displayCalendar();
+  displayTrackedWebsites(response);
 };
 
 function loadListeners(response) {
@@ -78,6 +77,7 @@ function buildTrackingObject(response, websiteURL, activeTracking) {
 };
 
 function displayCalendar(date) {
+  var date = new Date();
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
