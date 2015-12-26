@@ -15,9 +15,9 @@ function retrieveFromStorage() {
 function functionLoader(response) {
   var date = new Date();
   trackCurrentWebsite(response);
-  saveOnChange(response);
   displayCalendar(date);
   displayTrackedWebsites(response, date);
+  saveOnChange(response);
 };
 
 function trackCurrentWebsite(response) {
