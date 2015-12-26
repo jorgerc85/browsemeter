@@ -90,7 +90,7 @@ function displayTrackedWebsites(response, date) {
   if (registeredWebsites.length > 0) {
     trackedWebsitesDiv.className = 'show';
     for (var web in registeredWebsites) {
-      constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv);
+      constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv);
       displayCounters(response, date);
     };
   } else {
@@ -105,7 +105,7 @@ function clearTrackedWebsitesDiv() {
   };
 };
 
-function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
+function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
   var singleWebsiteDiv = document.createElement('div');
   singleWebsiteDiv.setAttribute('class', 'singleWebsite');
   singleWebsiteDiv.setAttribute('id', registeredWebsites[web]);
