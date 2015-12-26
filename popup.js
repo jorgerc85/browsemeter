@@ -55,7 +55,13 @@ function saveOnChange(response) {
   };
 };
 
-function saveToStorage(response, websiteURL, activeTracking) {
+function saveToStorage(response) {
+  chrome.storage.local.set(response, function(response) {
+    displayFeedback('Saved!');
+  });
+};
+
+function buildTrackingObject(response, websiteURL, activeTracking) {
   var date = new Date();
   response[websiteURL] = {
     'tracking': activeTracking,
@@ -63,9 +69,7 @@ function saveToStorage(response, websiteURL, activeTracking) {
     'totalTime': 0,
     'trackDate': date.getDate()
   };
-  chrome.storage.local.set(response, function(response) {
-    displayFeedback('Saved!');
-  });
+  return response;
 };
 
 function displayCalendar(date) {
