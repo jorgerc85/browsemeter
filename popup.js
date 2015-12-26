@@ -43,7 +43,6 @@ function trackCurrentWebsite(response) {
           response = buildTrackingObject(response, currentTabURL, true);
           saveToStorage(response);
           retrieveFromStorage().then(function(response) {
-            clearTrackedWebsitesDiv();
             var date = new Date();
             displayTrackedWebsites(response, date);
           });
@@ -103,13 +102,6 @@ function displayTrackedWebsites(response, date) {
     };
   } else {
     trackedWebsitesDiv.className = 'hide';
-  };
-};
-
-function clearTrackedWebsitesDiv() {
-  var trackedWebsites = document.getElementsByClassName('singleWebsite');
-  for (var i = 0; i < trackedWebsites.length; i++) {
-    trackedWebsites[i].remove();
   };
 };
 
