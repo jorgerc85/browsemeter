@@ -35,6 +35,11 @@ function trackCurrentWebsite(response) {
         });
         if (!alreadyTracking) {
           saveToStorage(response, currentTabURL, true);
+          retrieveFromStorage().then(function(response) {
+            clearTrackedWebsitesDiv();
+            var date = new Date();
+            displayTrackedWebsites(response, date);
+          });
         } else {
           displayFeedback('Already tracking');
         };
