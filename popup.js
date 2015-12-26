@@ -96,6 +96,13 @@ function displayTrackedWebsites(response, date) {
   };
 };
 
+function clearTrackedWebsitesDiv() {
+  var trackedWebsites = document.getElementsByClassName('singleWebsite');
+  for (var i = 0; i < trackedWebsites.length; i++) {
+    trackedWebsites[i].remove();
+  };
+};
+
 function constructTrackedWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv) {
   var newDiv = document.createElement('div');
   newDiv.setAttribute('class', 'singleWebsite');
