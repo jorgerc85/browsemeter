@@ -115,9 +115,9 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   trackedWebsitesDiv.appendChild(singleWebsiteDiv);
   var websiteCheckbox = document.createElement('input');
   websiteCheckbox.setAttribute('type', 'checkbox');
-  websiteCheckbox.setAttribute('checked', response[registeredWebsites[web]]['tracking']);
   websiteCheckbox.setAttribute('name', registeredWebsites[web]);
   websiteCheckbox.setAttribute('class', 'websiteCheckbox');
+  websiteCheckbox.checked = response[registeredWebsites[web]]['tracking'];
   singleWebsiteDiv.appendChild(websiteCheckbox);
   var websiteLabel = document.createElement('label');
   websiteLabel.innerText = registeredWebsites[web];
