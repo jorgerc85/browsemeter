@@ -87,14 +87,13 @@ function displayCalendar(date) {
   dayHeader.innerText = date.getDate();
 };
 
-function displayTrackedWebsites(response, date) {
+function displayTrackedWebsites(response) {
   var registeredWebsites = Object.keys(response);
   var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
   if (registeredWebsites.length > 0) {
     trackedWebsitesDiv.className = 'show';
     for (var web in registeredWebsites) {
       constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWebsitesDiv);
-      displayCounters(response, date);
     };
   } else {
     trackedWebsitesDiv.className = 'hide';
@@ -120,19 +119,18 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   counterSpan.setAttribute('class', 'counterSpan');
   websiteLabel.appendChild(counterSpan);
   saveOnChange(response, websiteCheckbox);
+  displayCounter(response, counterSpan);
 };
 
-function displayCounters(response, date) {
-  var websiteCounters = document.getElementsByClassName('counterSpan');
-  for (var i = 0; i < websiteCounters.length; i++) {
-    var counter = websiteCounters[i].getAttribute('name');
-    if (Object.keys(response).length > 0) {
-      if (response[counter]['trackDate'] == date.getDate()) {
-        var totalTime = response[counter]['totalTime'];
-        websiteCounters[i].innerText = Math.floor(totalTime / 60) + " min.";
-      } else {
-        websiteCounters[i].innerText = "0 min.";
-      };
+function displayCounter(response, counterSpan) {
+  var date = new Date();
+  var counter = counterSpan.getAttribute('name');
+  if (Object.keys(response).length > 0) {
+    if (response[counter]['trackDate'] == date.getDate()) {
+      var totalTime = response[counter]['totalTime'];
+      counterSpan.innerText = Math.floor(totalTime / 60) + " min.";
+    } else {
+      counterSpan.innerText = "0 min.";
     };
   };
 };
