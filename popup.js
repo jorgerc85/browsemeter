@@ -78,7 +78,7 @@ function buildTrackingObject(response, websiteURL, activeTracking) {
   response[websiteURL] = {
     'tracking': activeTracking,
     'openTime': 0,
-    'totalTime': 0,
+    'totalTime': response[websiteURL]['totalTime'],
     'trackDate': date.getDate()
   };
   return response;
