@@ -60,6 +60,16 @@ function updateOnNewTrack(response, registeredWebsites) {
   constructSingleWebsiteDiv(response, newWebsiteIndex, registeredWebsites, trackedWebsitesDiv);
 };
 
+function toggleTracking(response, trackToggle) {
+  trackToggle.addEventListener('click', function(event) {
+    var toggledWebsite = event.target.id;
+    response[toggledWebsite]['tracking'] = !response[toggledWebsite]['tracking'];
+    saveToStorage(response);
+    event.target.classList.toggle('icon-pause2');
+    event.target.classList.toggle('icon-play3');
+  });
+};
+
 // In order to remove an attribute of response, loca storage has to be cleared.
 // Otherwise, local storage will only update the attributes that are set for save.
 function removeWebsiteFromTracking(response, removeButton) {
@@ -161,7 +171,13 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   singleWebsiteDiv.appendChild(actionDiv);
 
   var trackToggle = document.createElement('div');
-  trackToggle.setAttribute('class', 'trackToggle actionButton icon-pause2');
+  trackToggle.setAttribute('class', 'trackToggle actionButton');
+  var trackingWebsite = response[registeredWebsites[web]]['tracking'];
+  if (trackingWebsite) {
+    trackToggle.classList.add('icon-pause2');
+  } else {
+    trackToggle.classList.add('icon-play3');
+  };
   trackToggle.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(trackToggle);
   var removeButton = document.createElement('div');
@@ -169,13 +185,14 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   removeButton.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(removeButton);
 
-  singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, removeButton);
+  singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, trackToggle, removeButton);
 };
 
-function singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, removeButton) {
+function singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, trackToggle, removeButton) {
   saveOnChange(response, websiteCheckbox);
   displayCounter(response, counterSpan);
   removeWebsiteFromTracking(response, removeButton);
+  toggleTracking(response, trackToggle);
 };
 
 function displayCounter(response, counterSpan) {
