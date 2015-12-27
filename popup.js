@@ -67,7 +67,14 @@ function removeWebsiteFromTracking(response, removeButton) {
     chrome.storage.local.clear();
     delete response[event.target.id];
     saveToStorage(response);
+    removeSingleWebsiteDiv(event.target.id);
   });
+};
+
+function removeSingleWebsiteDiv(singleWebsiteId) {
+  var trackedWebsitesDiv = document.getElementById('trackedWebsitesDiv');
+  var singleWebsiteDiv = document.getElementById(singleWebsiteId);
+  trackedWebsitesDiv.removeChild(singleWebsiteDiv);
 };
 
 function saveOnChange(response, websiteCheckbox) {
