@@ -132,18 +132,34 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   singleWebsiteDiv.setAttribute('class', 'singleWebsite');
   singleWebsiteDiv.setAttribute('id', registeredWebsites[web]);
   trackedWebsitesDiv.appendChild(singleWebsiteDiv);
+
+  var websiteURLDiv = document.createElement('div');
+  websiteURLDiv.setAttribute('class', 'websiteURLDiv');
+  singleWebsiteDiv.appendChild(websiteURLDiv);
+
   var websiteCheckbox = document.createElement('input');
   websiteCheckbox.setAttribute('type', 'checkbox');
   websiteCheckbox.setAttribute('name', registeredWebsites[web]);
   websiteCheckbox.setAttribute('class', 'websiteCheckbox');
   websiteCheckbox.checked = response[registeredWebsites[web]]['tracking'];
-  singleWebsiteDiv.appendChild(websiteCheckbox);
+  websiteURLDiv.appendChild(websiteCheckbox);
   var websiteLabel = document.createElement('label');
   websiteLabel.innerText = registeredWebsites[web];
-  singleWebsiteDiv.appendChild(websiteLabel);
+  websiteURLDiv.appendChild(websiteLabel);
+
+  var counterDiv = document.createElement('div');
+  counterDiv.setAttribute('class', 'counterDiv');
+  singleWebsiteDiv.appendChild(counterDiv);
+
+  var counterSpan = document.createElement('span');
+  counterSpan.setAttribute('name', registeredWebsites[web]);
+  counterSpan.setAttribute('class', 'counterSpan');
+  counterDiv.appendChild(counterSpan);
+
   var actionDiv = document.createElement('div');
   actionDiv.setAttribute('class', 'actionDiv');
   singleWebsiteDiv.appendChild(actionDiv);
+
   var trackToggle = document.createElement('div');
   trackToggle.setAttribute('class', 'trackToggle actionButton icon-pause2');
   trackToggle.setAttribute('id', registeredWebsites[web]);
@@ -152,10 +168,7 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   removeButton.setAttribute('class', 'removeButton actionButton icon-cross');
   removeButton.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(removeButton);
-  var counterSpan = document.createElement('span');
-  counterSpan.setAttribute('name', registeredWebsites[web]);
-  counterSpan.setAttribute('class', 'counterSpan');
-  websiteLabel.appendChild(counterSpan);
+
   singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, removeButton);
 };
 

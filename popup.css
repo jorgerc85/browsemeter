@@ -77,9 +77,24 @@ div#trackedWebsitesDiv div.singleWebsite {
   vertical-align: text-top;
 }
 
-.actionDiv {
+.websiteURLDiv {
+  width: 55%;
+  display: inline-block;
+}
+
+.counterDiv {
+  width: 25%;
+  display: inline-block;
+}
+
+.counterSpan {
   float: right;
-  width: 50px;
+  font-size: small;
+}
+
+.actionDiv {
+  width: 20%;
+  display: inline-block;
 }
 
 .actionButton {
@@ -102,10 +117,6 @@ div#trackedWebsitesDiv div.singleWebsite {
   float: right;
   font-size: small;
   padding-top: 2px;
-}
-
-.counterSpan {
-  margin-left: 60px;
 }
 
 #trackWebsiteButton {
