@@ -67,6 +67,11 @@ h4, h6 {
   height: auto;
 }
 
+div#trackedWebsitesDiv div.singleWebsite {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 #trackedWebsitesDiv label {
   font-size: small;
   vertical-align: text-top;
