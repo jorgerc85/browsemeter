@@ -60,6 +60,16 @@ function updateOnNewTrack(response, registeredWebsites) {
   constructSingleWebsiteDiv(response, newWebsiteIndex, registeredWebsites, trackedWebsitesDiv);
 };
 
+// In order to remove an attribute of response, loca storage has to be cleared.
+// Otherwise, local storage will only update the attributes that are set for save.
+function removeWebsiteFromTracking(response, removeButton) {
+  removeButton.addEventListener('click', function(event) {
+    chrome.storage.local.clear();
+    delete response[event.target.id];
+    saveToStorage(response);
+  });
+};
+
 function saveOnChange(response, websiteCheckbox) {
   websiteCheckbox.addEventListener('change', function(event) {
     response = buildTrackingObject(response, event.target.name, event.target.checked);
@@ -127,9 +137,11 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   singleWebsiteDiv.appendChild(actionDiv);
   var trackToggle = document.createElement('div');
   trackToggle.setAttribute('class', 'trackToggle actionButton icon-pause2');
+  trackToggle.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(trackToggle);
   var removeButton = document.createElement('div');
   removeButton.setAttribute('class', 'removeButton actionButton icon-cross');
+  removeButton.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(removeButton);
   var counterSpan = document.createElement('span');
   counterSpan.setAttribute('name', registeredWebsites[web]);
@@ -137,6 +149,7 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   websiteLabel.appendChild(counterSpan);
   saveOnChange(response, websiteCheckbox);
   displayCounter(response, counterSpan);
+  removeWebsiteFromTracking(response, removeButton);
 };
 
 function displayCounter(response, counterSpan) {
