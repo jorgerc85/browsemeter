@@ -122,6 +122,15 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   var websiteLabel = document.createElement('label');
   websiteLabel.innerText = registeredWebsites[web];
   singleWebsiteDiv.appendChild(websiteLabel);
+  var actionDiv = document.createElement('div');
+  actionDiv.setAttribute('class', 'actionDiv');
+  singleWebsiteDiv.appendChild(actionDiv);
+  var trackToggle = document.createElement('div');
+  trackToggle.setAttribute('class', 'trackToggle actionButton icon-pause2');
+  actionDiv.appendChild(trackToggle);
+  var removeButton = document.createElement('div');
+  removeButton.setAttribute('class', 'removeButton actionButton icon-cross');
+  actionDiv.appendChild(removeButton);
   var counterSpan = document.createElement('span');
   counterSpan.setAttribute('name', registeredWebsites[web]);
   counterSpan.setAttribute('class', 'counterSpan');
