@@ -91,11 +91,13 @@ function saveToStorage(response) {
 };
 
 function buildTrackingObject(response, websiteURL, activeTracking) {
+  var trackingWebsite = response[websiteURL] !== undefined;
+  var totalTime = (trackingWebsite) ? response[websiteURL]['totalTime'] : 0;
   var date = new Date();
   response[websiteURL] = {
     'tracking': activeTracking,
     'openTime': 0,
-    'totalTime': response[websiteURL]['totalTime'],
+    'totalTime': totalTime,
     'trackDate': date.getDate()
   };
   return response;
