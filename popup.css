@@ -89,6 +89,11 @@ div#trackedWebsitesDiv div.singleWebsite {
   color: #DFDFDF;
 }
 
+.actionButton:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .trackToggle {
   float: left;
 }
