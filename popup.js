@@ -156,6 +156,10 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   counterSpan.setAttribute('name', registeredWebsites[web]);
   counterSpan.setAttribute('class', 'counterSpan');
   websiteLabel.appendChild(counterSpan);
+  singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, removeButton);
+};
+
+function singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, removeButton) {
   saveOnChange(response, websiteCheckbox);
   displayCounter(response, counterSpan);
   removeWebsiteFromTracking(response, removeButton);
