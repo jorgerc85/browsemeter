@@ -19,7 +19,7 @@ h4, h6 {
   display: none;
 }
 
-#calendar {
+div#calendar {
   background-color: #E11414;
   border: 1px solid gray;
   border-radius: 6%;
@@ -32,13 +32,13 @@ h4, h6 {
   margin-bottom: 9px;
 }
 
-#monthContanier {
+div#monthContanier {
   background-color: #D20505;
   height: 20px;
   border-bottom: 1px solid gray;
 }
 
-#monthName {
+p#monthName {
   margin-bottom: 0px;
   padding-top: 4px;
   padding-bottom: 2px;
@@ -46,12 +46,12 @@ h4, h6 {
   font-size: 10px;
 }
 
-#dayContainer {
+div#dayContainer {
   background-color: white;
   height: 48px;
 }
 
-#day {
+p#day {
   margin-top: 0px;
   padding-top: 2px;
   padding-bottom: 6px;
@@ -60,7 +60,7 @@ h4, h6 {
   font-weight: bold;
 }
 
-#trackedWebsitesDiv {
+div#trackedWebsitesDiv {
   background-color: white;
   border: 1px solid gray;
   padding: 10px 4px 10px 4px;
@@ -72,54 +72,53 @@ div#trackedWebsitesDiv div.singleWebsite {
   margin-bottom: 2px;
 }
 
-#trackedWebsitesDiv label {
+div#trackedWebsitesDiv label {
   font-size: small;
   vertical-align: text-top;
 }
 
-.websiteURLDiv {
+div.websiteURLDiv {
   width: 55%;
   display: inline-block;
 }
 
-.counterDiv {
+div.counterDiv {
   width: 25%;
   display: inline-block;
 }
 
-.counterSpan {
+label.counterLabel {
   float: right;
-  font-size: small;
 }
 
-.actionDiv {
+div.actionDiv {
   width: 20%;
   display: inline-block;
 }
 
-.actionButton {
+div.actionButton {
   width: 50%;
   display: inline-block;
   text-align: center;
   color: #DFDFDF;
 }
 
-.actionButton:hover {
+div.actionButton:hover {
   color: black;
   cursor: pointer;
 }
 
-.trackToggle {
+div.trackToggle {
   float: left;
 }
 
-.removeButton {
+div.removeButton {
   float: right;
   font-size: small;
   padding-top: 2px;
 }
 
-#trackWebsiteButton {
+button#trackWebsiteButton {
   margin-top: 10px;
   margin-bottom: 5px;
   width: 70%;
