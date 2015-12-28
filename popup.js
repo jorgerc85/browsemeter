@@ -87,13 +87,6 @@ function removeSingleWebsiteDiv(singleWebsiteId) {
   trackedWebsitesDiv.removeChild(singleWebsiteDiv);
 };
 
-function saveOnChange(response, websiteCheckbox) {
-  websiteCheckbox.addEventListener('change', function(event) {
-    response = buildTrackingObject(response, event.target.name, event.target.checked);
-    saveToStorage(response);
-  });
-};
-
 function saveToStorage(response) {
   chrome.storage.local.set(response, function(response) {
     displayFeedback('Saved!');
@@ -147,12 +140,6 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   websiteURLDiv.setAttribute('class', 'websiteURLDiv');
   singleWebsiteDiv.appendChild(websiteURLDiv);
 
-  var websiteCheckbox = document.createElement('input');
-  websiteCheckbox.setAttribute('type', 'checkbox');
-  websiteCheckbox.setAttribute('name', registeredWebsites[web]);
-  websiteCheckbox.setAttribute('class', 'websiteCheckbox');
-  websiteCheckbox.checked = response[registeredWebsites[web]]['tracking'];
-  websiteURLDiv.appendChild(websiteCheckbox);
   var websiteLabel = document.createElement('label');
   websiteLabel.innerText = registeredWebsites[web];
   websiteURLDiv.appendChild(websiteLabel);
@@ -185,11 +172,10 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   removeButton.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(removeButton);
 
-  singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, trackToggle, removeButton);
+  singleWebsiteDivBehaviors(response, counterSpan, trackToggle, removeButton);
 };
 
-function singleWebsiteDivBehaviors(response, websiteCheckbox, counterSpan, trackToggle, removeButton) {
-  saveOnChange(response, websiteCheckbox);
+function singleWebsiteDivBehaviors(response, counterSpan, trackToggle, removeButton) {
   displayCounter(response, counterSpan);
   removeWebsiteFromTracking(response, removeButton);
   toggleTracking(response, trackToggle);
