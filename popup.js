@@ -146,10 +146,10 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   counterDiv.setAttribute('class', 'counterDiv');
   singleWebsiteDiv.appendChild(counterDiv);
 
-  var counterSpan = document.createElement('span');
-  counterSpan.setAttribute('name', registeredWebsites[web]);
-  counterSpan.setAttribute('class', 'counterSpan');
-  counterDiv.appendChild(counterSpan);
+  var counterLabel = document.createElement('label');
+  counterLabel.setAttribute('name', registeredWebsites[web]);
+  counterLabel.setAttribute('class', 'counterLabel');
+  counterDiv.appendChild(counterLabel);
 
   var actionDiv = document.createElement('div');
   actionDiv.setAttribute('class', 'actionDiv');
@@ -170,11 +170,11 @@ function constructSingleWebsiteDiv(response, web, registeredWebsites, trackedWeb
   removeButton.setAttribute('id', registeredWebsites[web]);
   actionDiv.appendChild(removeButton);
 
-  singleWebsiteDivBehaviors(response, counterSpan, trackToggle, removeButton);
+  singleWebsiteDivBehaviors(response, counterLabel, trackToggle, removeButton);
 };
 
-function singleWebsiteDivBehaviors(response, counterSpan, trackToggle, removeButton) {
-  displayCounter(response, counterSpan);
+function singleWebsiteDivBehaviors(response, counterLabel, trackToggle, removeButton) {
+  displayCounter(response, counterLabel);
   removeWebsiteFromTracking(response, removeButton);
   toggleTracking(response, trackToggle);
 };
